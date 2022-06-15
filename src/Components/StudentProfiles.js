@@ -41,12 +41,9 @@ const StudentProfiles = () => {
   }, []);
 
   const handleSearchTags = (e) => {
-    const tagName = e.target.value;
-    setSearchTags(tagName);
-    console.log(searchTags);
-
-    const fetchByTagName = studentProfiles.filter(profile => profile?.tags?.includes(searchTags.toLowerCase()))
+    const tagName = e.target.value; setSearchTags(tagName); console.log(searchTags, studentProfiles); const fetchByTagName = studentProfiles.filter(profile => profile?.tags?.filter(t => t.includes(tagName)).length > 0);
     console.log(fetchByTagName);
+    setStudentProfiles(fetchByTagName); 
 
 
   }
@@ -68,7 +65,7 @@ const StudentProfiles = () => {
           type="text"
           placeholder="Search by tag"
           className="border w-full p-2 outline-none"
-          onChange={handleSearchTags}
+          onKeyUp={handleSearchTags}
         />
 
       </div>
